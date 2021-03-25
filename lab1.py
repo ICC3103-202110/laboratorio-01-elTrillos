@@ -88,14 +88,14 @@ def gameplay():
     sizee = startui()
     print(sizee)
     daboi,daboi2,ancho,alto,tempBoard = cardgen(sizee)
-    gameui(daboi2)
     qnparte = random.randint(1,2)
     curplaya = qnparte
     print("comienza el jugador", curplaya)
     while playing == True:
         asking = True
-        print("a")
+        #print("a")
         while asking == True:
+            gameui(tempBoard)
             print("Jugador", curplaya , "escoja la coordenada de la carta (x y) numero", curpart)
             ans = input().split(" ")
             if ans[0].isnumeric() and ans[1].isnumeric() == True:
@@ -133,10 +133,11 @@ def gameplay():
                             print("escribe 2 coordenadas DISTINTAS")
                             curpart = 1
                             numss = ["",""]
-                            tempBoard = daboi2
+                            tempBoard = list(daboi2)
                             print(daboi2)
                             asking = True
                         else:
+                            curpart = 1
                             asking = False
                     
                 else: 
@@ -144,15 +145,42 @@ def gameplay():
             else:
                 print("error, seguir el formato por favor")
         if numss[0] == numss[1]:
-            print("oke")
+            print("jugador" ,curplaya, "acerto!")
             if curplaya == 1:
+                curplaya = 2
                 score1 +=1
             else:
+                curplaya = 1
                 score2 +=1
+            print(ans1)
+            print(ans2)
+            tempBoard[ans1[1]-1][ans1[0]-1] = "  "
+            tempBoard[ans2[1]-1][ans2[0]-1] = "  "
+            daboi2[ans1[1]-1][ans1[0]-1] = "  "
+            daboi2[ans2[1]-1][ans2[0]-1] = "  "
             
         else:
-            print("dou")
-        playing = False
+            print("jugador" ,curplaya ,"no acerto!")
+
+            if curplaya == 1:
+                curplaya = 2
+            else:
+                curplaya = 1
+            tempBoard = []
+            for x in daboi2:
+                tempBoard.append(list(x))
+            #tempBoard = list(daboi2)
+            #print("dou")
+        print("Jugador 1:",score1 ,"/ Jugador 2:", score2)
+        if score1 + score2 == sizee:
+            if score1 > score2:
+                print("El jugador 1 ha ganado!" )
+            elif score2 > score1:
+                print("El jugador 2 ha ganado!" )
+            else:
+                print("Empate!")
+            playing = False
+        playing = True
 
         
 
