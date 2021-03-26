@@ -4,11 +4,11 @@ import random
 from functools import reduce
 
 def startui():
-    print("wilcom to da game")
+    print(" ")
     asking = 1
     while asking == 1:
 
-        ans = input("cuantos pares")
+        ans = input("Ingrese cuantos pares desea: ")
         if ans.isnumeric() == True:
             print("ok")
             asking = 0
@@ -40,7 +40,7 @@ def cardgen(size):
         k1 +=1
     #print(listaOG)
     random.shuffle(listaOG)
-    print(listaOG)
+    #print(listaOG)
     while n1 < alto:
         while n2 < ancho:
             if listaOG[0] < 10:
@@ -62,7 +62,7 @@ def cardgen(size):
         n2 = 0
         n1 += 1
     #print(daBoard)
-    print(daBoard2)
+    #print(daBoard2)
     return daBoard,daBoard2,ancho,alto,daBoard3
 
 def gameui(boardimg):
@@ -82,20 +82,23 @@ def gameplay():
     ans = []
     ans1 = []
     ans2 = []
-    print("===============================")
-    print("  Bienvenido a memorice v1.0   ")
-    print("===============================")
+    print("================================")
+    print("   Bienvenido a memorice v1.0   ")
+    print("                                ")
+    print("   Copyright TrillosSoft 2021   ")
+    print("================================")
     sizee = startui()
-    print(sizee)
+    #print(sizee)
     daboi,daboi2,ancho,alto,tempBoard = cardgen(sizee)
-    qnparte = random.randint(1,2)
+    qnparte = 1
     curplaya = qnparte
     print("comienza el jugador", curplaya)
     while playing == True:
         asking = True
         #print("a")
+        gameui(tempBoard)
         while asking == True:
-            gameui(tempBoard)
+            #gameui(tempBoard)
             print("Jugador", curplaya , "escoja la coordenada de la carta (x y) numero", curpart)
             ans = input().split(" ")
             if ans[0].isnumeric() and ans[1].isnumeric() == True:
@@ -106,39 +109,28 @@ def gameplay():
                 else:
                     ans2 = list(ans)
                 if 0 < ans[0] <= ancho and 0 < ans[1] <= alto:
-                    #print("ok")
-                    #print(tempBoard)
-                    #print(daboi2)
-                    #print(daboi)
-                    #print("")
-
-
-                    #print(tempBoard)
-                    #print(daboi2)
-                    #print(daboi)
-                    #print("")
-                    tempBoard[ans[1]-1][ans[0]-1] = daboi[ans[1]-1][ans[0]-1]
-                    #print(tempBoard)
-                    #print(daboi2)
-                    #print(daboi)
-                    gameui(tempBoard)
-                    numss[curpart-1] = daboi[ans[1]-1][ans[0]-1]
-                    if curpart == 1:
-                        curpart = 2
-                        print(numss)
-                        
-                        asking = True
-                    else:
-                        if ans1 == ans2:
-                            print("escribe 2 coordenadas DISTINTAS")
-                            curpart = 1
-                            numss = ["",""]
-                            tempBoard = list(daboi2)
-                            print(daboi2)
+                    if daboi2[ans[1]-1][ans[0]-1] != "  ":
+                        tempBoard[ans[1]-1][ans[0]-1] = daboi[ans[1]-1][ans[0]-1]
+                        gameui(tempBoard)
+                        numss[curpart-1] = daboi[ans[1]-1][ans[0]-1]
+                        if curpart == 1:
+                            curpart = 2
+                            #print(numss)
+                            
                             asking = True
                         else:
-                            curpart = 1
-                            asking = False
+                            if ans1 == ans2:
+                                print("escribe 2 coordenadas DISTINTAS")
+                                curpart = 1
+                                numss = ["",""]
+                                tempBoard = list(daboi2)
+                                #print(daboi2)
+                                asking = True
+                            else:
+                                curpart = 1
+                                asking = False
+                    else:
+                        print("error, escribir coordenadas no descubiertas previamente")
                     
                 else: 
                     print("error, escribir valores dentro del tamaño de la tabla de juego")
@@ -152,8 +144,8 @@ def gameplay():
             else:
                 curplaya = 1
                 score2 +=1
-            print(ans1)
-            print(ans2)
+            #print(ans1)
+            #print(ans2)
             tempBoard[ans1[1]-1][ans1[0]-1] = "  "
             tempBoard[ans2[1]-1][ans2[0]-1] = "  "
             daboi2[ans1[1]-1][ans1[0]-1] = "  "
@@ -175,10 +167,13 @@ def gameplay():
         if score1 + score2 == sizee:
             if score1 > score2:
                 print("El jugador 1 ha ganado!" )
+                break
             elif score2 > score1:
                 print("El jugador 2 ha ganado!" )
+                break
             else:
                 print("Empate!")
+                break
             playing = False
         playing = True
 
