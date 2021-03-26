@@ -105,22 +105,22 @@ def gameplay():
                     ans1 = list(ans)
                 else:
                     ans2 = list(ans)
-                if ans[0] <= ancho and ans[1] <= alto:
-                    print("ok")
-                    print(tempBoard)
-                    print(daboi2)
-                    print(daboi)
-                    print("")
+                if 0 < ans[0] <= ancho and 0 < ans[1] <= alto:
+                    #print("ok")
+                    #print(tempBoard)
+                    #print(daboi2)
+                    #print(daboi)
+                    #print("")
 
 
-                    print(tempBoard)
-                    print(daboi2)
-                    print(daboi)
-                    print("")
+                    #print(tempBoard)
+                    #print(daboi2)
+                    #print(daboi)
+                    #print("")
                     tempBoard[ans[1]-1][ans[0]-1] = daboi[ans[1]-1][ans[0]-1]
-                    print(tempBoard)
-                    print(daboi2)
-                    print(daboi)
+                    #print(tempBoard)
+                    #print(daboi2)
+                    #print(daboi)
                     gameui(tempBoard)
                     numss[curpart-1] = daboi[ans[1]-1][ans[0]-1]
                     if curpart == 1:
@@ -182,6 +182,5 @@ def gameplay():
             playing = False
         playing = True
 
-        
-
+    
 gameplay()
